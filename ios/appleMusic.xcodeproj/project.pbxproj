@@ -37,6 +37,9 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = appleMusic/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = appleMusic/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-appleMusic-appleMusicTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appleMusic-appleMusicTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23C162642B0E6E28008AF840 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		23C162652B0E7191008AF840 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		23C162662B0E71FD008AF840 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-appleMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appleMusic.debug.xcconfig"; path = "Target Support Files/Pods-appleMusic/Pods-appleMusic.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-appleMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appleMusic.release.xcconfig"; path = "Target Support Files/Pods-appleMusic/Pods-appleMusic.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-appleMusic-appleMusicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appleMusic-appleMusicTests.debug.xcconfig"; path = "Target Support Files/Pods-appleMusic-appleMusicTests/Pods-appleMusic-appleMusicTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 		13B07FAE1A68108700A75B9A /* appleMusic */ = {
 			isa = PBXGroup;
 			children = (
+				23C162632B0E6DCB008AF840 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -94,6 +98,16 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = appleMusic;
+			sourceTree = "<group>";
+		};
+		23C162632B0E6DCB008AF840 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				23C162652B0E7191008AF840 /* Ionicons.ttf */,
+				23C162662B0E71FD008AF840 /* MaterialIcons.ttf */,
+				23C162642B0E6E28008AF840 /* AntDesign.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {

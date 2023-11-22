@@ -1,23 +1,39 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {VibrancyView} from '@react-native-community/blur';
-import MiniPlayerCover from 'components/molecules/FullPlayerCover';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {BlurView} from '@react-native-community/blur';
+// import MiniPlayerCover from 'molecules/FullPlayerCover';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+const PlatformView = Platform.OS === 'android' ? View : BlurView;
 
 const CustomTabs = ({state, descriptors, navigation}: BottomTabBarProps) => {
+  const {bottom} = useSafeAreaInsets();
+
   return (
-    <VibrancyView style={styles.container} blurType="light" blurAmount={10}>
-      <MiniPlayerCover />
+    <PlatformView
+      style={[{paddingBottom: bottom}, styles.container]}
+      blurType="dark"
+      blurRadius={25}
+      blurAmount={10}
+      overlayColor="transparent">
+      {/* <MiniPlayerCover /> */}
       <View style={styles.tabsContainer}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-              ? options.title
-              : route.name;
+          const {
+            options: {
+              tabBarTestID,
+              tabBarAccessibilityLabel,
+              title,
+              tabBarIcon,
+            },
+          } = descriptors[route.key];
 
           const isFocused = state.index === index;
+
+          let icon = null;
+          if (tabBarIcon) {
+            icon = tabBarIcon({focused: isFocused, color: 'black', size: 22});
+          }
 
           const onPress = () => {
             const event = navigation.emit({
@@ -31,22 +47,27 @@ const CustomTabs = ({state, descriptors, navigation}: BottomTabBarProps) => {
             }
           };
 
+          if (!title || !icon) {
+            return null;
+          }
+
           return (
             <TouchableOpacity
               accessibilityRole="button"
               accessibilityState={isFocused ? {selected: true} : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarTestID}
+              accessibilityLabel={tabBarAccessibilityLabel}
+              testID={tabBarTestID}
               onPress={onPress}
               style={{flex: 1}}>
+              {icon}
               <Text style={{color: isFocused ? '#673ab7' : '#222'}}>
-                {label}
+                {title}
               </Text>
             </TouchableOpacity>
           );
         })}
       </View>
-    </VibrancyView>
+    </PlatformView>
   );
 };
 
