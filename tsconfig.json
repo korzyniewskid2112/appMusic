@@ -1,0 +1,13 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "atoms/*": ["./components/atoms/*"],
+      "components/*": ["./components/*"],
+      "molecules/*": ["./molecules/*"],
+      "templates/*": ["./templates/*"],
+  }
+  },
+ 
+}
