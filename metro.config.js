@@ -17,6 +17,7 @@ const config = {
       pages: `${__dirname}/src/pages`,
       utils: `${__dirname}/src/pages`,
       hooks: `${__dirname}/src/hooks`,
+      providers: `${__dirname}/src/providers`,
     },
   },
 };

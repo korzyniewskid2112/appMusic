@@ -11,6 +11,7 @@
       "pages/*": ["./pages/*"],
       "utils/*": ["./utils/*"],
       "hooks/*": ["./hooks/*"],
+      "providers/*": ["./providers/*"],
   }
   },
  
