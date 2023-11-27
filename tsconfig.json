@@ -4,9 +4,14 @@
     "baseUrl": "./src",
     "paths": {
       "atoms/*": ["./components/atoms/*"],
-      "components/*": ["./components/*"],
-      "molecules/*": ["./molecules/*"],
-      "templates/*": ["./templates/*"],
+      "molecules/*": ["./components/molecules/*"],
+      "organisms/*": ["./components/organisms/*"],
+      "templates/*": ["./components/templates/*"],
+      "navigations/*": ["./navigations/*"],
+      "pages/*": ["./pages/*"],
+      "utils/*": ["./utils/*"],
+      "hooks/*": ["./hooks/*"],
+      "providers/*": ["./providers/*"],
   }
   },
  

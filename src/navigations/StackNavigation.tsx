@@ -8,7 +8,9 @@ const StackNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="Tabs"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name="Tabs" component={TabsNavigation} />
       <Stack.Screen name="MusicPlayer" component={View} />
     </Stack.Navigator>

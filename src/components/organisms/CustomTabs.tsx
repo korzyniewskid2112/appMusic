@@ -1,52 +1,87 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {VibrancyView} from '@react-native-community/blur';
-import MiniPlayerCover from 'components/molecules/FullPlayerCover';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {BlurView} from '@react-native-community/blur';
+import MiniPlayerCover from 'molecules/FullPlayerCover';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import LinearGradient from 'react-native-linear-gradient';
+import {useTheme} from '@react-navigation/native';
+
+const PlatformView = Platform.OS === 'android' ? View : BlurView;
 
 const CustomTabs = ({state, descriptors, navigation}: BottomTabBarProps) => {
+  const {bottom} = useSafeAreaInsets();
+  const theme = useTheme();
+
   return (
-    <VibrancyView style={styles.container} blurType="light" blurAmount={10}>
-      <MiniPlayerCover />
-      <View style={styles.tabsContainer}>
-        {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-              ? options.title
-              : route.name;
+    <View style={styles.container}>
+      <PlatformView
+        blurType={theme.dark ? 'dark' : 'light'}
+        blurAmount={3}
+        reducedTransparencyFallbackColor={theme.dark ? 'black' : 'white'}
+        style={styles.blurContainer}
+      />
+      <View>
+        <MiniPlayerCover />
+        <LinearGradient
+          locations={[0, 0.1, 0.1]}
+          colors={['transparent', 'rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0.8)']}
+          style={[{paddingBottom: bottom}, styles.tabContainer]}>
+          {state.routes.map((route, index) => {
+            const {
+              options: {
+                tabBarTestID,
+                tabBarAccessibilityLabel,
+                title,
+                tabBarIcon,
+              },
+            } = descriptors[route.key];
 
-          const isFocused = state.index === index;
+            const isFocused = state.index === index;
 
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
-
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name, route.params);
+            let icon = null;
+            if (tabBarIcon) {
+              icon = tabBarIcon({
+                focused: isFocused,
+                color: isFocused ? '#f82b47' : '#7d818d',
+                size: 22,
+              });
             }
-          };
 
-          return (
-            <TouchableOpacity
-              accessibilityRole="button"
-              accessibilityState={isFocused ? {selected: true} : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarTestID}
-              onPress={onPress}
-              style={{flex: 1}}>
-              <Text style={{color: isFocused ? '#673ab7' : '#222'}}>
-                {label}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
+
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name, route.params);
+              }
+            };
+
+            if (!title || !icon) {
+              return null;
+            }
+
+            return (
+              <TouchableOpacity
+                key={title}
+                accessibilityRole="button"
+                accessibilityState={isFocused ? {selected: true} : {}}
+                accessibilityLabel={tabBarAccessibilityLabel}
+                testID={tabBarTestID}
+                onPress={onPress}
+                style={styles.tabButton}>
+                <View style={styles.tabIcon}>{icon}</View>
+                <Text style={{color: isFocused ? '#f82b47' : '#7d818d'}}>
+                  {title}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </LinearGradient>
       </View>
-    </VibrancyView>
+    </View>
   );
 };
 
@@ -57,9 +92,27 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  tabsContainer: {
+  blurContainer: {
+    position: 'absolute',
+    paddingTop: 4,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+  },
+  tabContainer: {
     flexDirection: 'row',
-    paddingVertical: 5,
+    paddingTop: 20,
+  },
+  tabButton: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabIcon: {
+    marginBottom: 5,
   },
 });
 
