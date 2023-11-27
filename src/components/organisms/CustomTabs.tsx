@@ -4,32 +4,27 @@ import {BlurView} from '@react-native-community/blur';
 import MiniPlayerCover from 'molecules/FullPlayerCover';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
+import {useTheme} from '@react-navigation/native';
 
 const PlatformView = Platform.OS === 'android' ? View : BlurView;
 
 const CustomTabs = ({state, descriptors, navigation}: BottomTabBarProps) => {
   const {bottom} = useSafeAreaInsets();
+  const theme = useTheme();
 
   return (
     <View style={styles.container}>
       <PlatformView
-        blurType="light"
-        blurAmount={4}
-        reducedTransparencyFallbackColor="white"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: -1,
-        }}
+        blurType={theme.dark ? 'dark' : 'light'}
+        blurAmount={3}
+        reducedTransparencyFallbackColor={theme.dark ? 'black' : 'white'}
+        style={styles.blurContainer}
       />
       <View>
         <MiniPlayerCover />
         <LinearGradient
-          locations={[0, 0.1]}
-          colors={['transparent', 'rgba(0, 0, 0, 0.8)']}
+          locations={[0, 0.1, 0.1]}
+          colors={['transparent', 'rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0.8)']}
           style={[{paddingBottom: bottom}, styles.tabContainer]}>
           {state.routes.map((route, index) => {
             const {
@@ -70,6 +65,7 @@ const CustomTabs = ({state, descriptors, navigation}: BottomTabBarProps) => {
 
             return (
               <TouchableOpacity
+                key={title}
                 accessibilityRole="button"
                 accessibilityState={isFocused ? {selected: true} : {}}
                 accessibilityLabel={tabBarAccessibilityLabel}
@@ -95,6 +91,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  blurContainer: {
+    position: 'absolute',
+    paddingTop: 4,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
   },
   tabContainer: {
     flexDirection: 'row',

@@ -9,6 +9,7 @@ import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Test = () => (
   <NativeScrollView>
+    <Text>xd</Text>
     <Text>dwe</Text>
     <Text>dwe</Text>
     <Text>dwe</Text>
@@ -58,18 +59,15 @@ const Test = () => (
     <Text>dwe</Text>
     <Text>dwe</Text>
     <Text>dwe</Text>
-    <Text>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
-    <Text style={{backgroundColor: 'white'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+    <Text style={{backgroundColor: 'green'}}>dwe</Text>
+
     <Text>dwe</Text>
     <Text>dwe</Text>
     <Text>dwe</Text>
